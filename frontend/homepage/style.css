@@ -1,0 +1,73 @@
+body
+{
+    background-color: black;
+    font-family: commit mono, monospace;
+    color: white;
+}
+
+a
+{
+    text-decoration: none;
+    color: white;
+}
+
+.navigation
+{
+    font-size: 20px;
+    width: 50%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    padding-top: 1%;
+
+}
+
+.home-btn,
+.posts-btn,
+.guest-btn,
+.contacts-btn {
+    margin-left: 6.25%;
+    margin-right: 6.25%;
+}
+
+.ascii-art{
+   text-align: center;
+   margin-top: 5%;
+}
+
+
+.highlight{
+    color: hsl(270, 73%, 53%);
+}
+
+
+.nav-links{
+    text-align: center;
+    color: hsl(270, 73%, 53%);
+}
+
+
+.about-me-container{
+    width: 50%;
+    margin: auto;
+    padding-top: 5%;
+}
+
+
+
+
+
+.about-me{
+    text-align: left;
+
+}
+
+
+
+.footer{
+    width: 50%;
+    padding-top: 10%;
+    margin: auto;
+    text-align: center;
+    color: rgb(155, 156, 167, 1);
+}

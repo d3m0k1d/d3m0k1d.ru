@@ -1,0 +1,16 @@
+- name: Configure a frontend server
+  hosts: server
+  become: yes
+
+  tasks:
+    - name: install git
+      apt:
+        name: git
+        state: latest
+      when: ansible_os_family == "Debian"
+    
+    - name: clone repo with script
+      ansible.builtin.git:
+        clone: https://github.com/d3m0k1d/automation-scripts.git
+      when: ansible_os_family == "Debian"
+

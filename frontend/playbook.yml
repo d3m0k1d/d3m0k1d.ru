@@ -38,5 +38,5 @@
       when: ansible_os_family == "Debian"
 
     - name: Run certbot for domain
-      shell: certbot --nginx -d your-domain.com -d www.your-domain.com --non-interactive --agree-tos --email your-email@example.com
+      shell: certbot --nginx -d d3m0k1d.ru -d www.d3m0k1d.ru --non-interactive --agree-tos --email contact@d3m0k1d.ru
       when: ansible_os_family == "Debian"

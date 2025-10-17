@@ -14,3 +14,18 @@
         clone: https://github.com/d3m0k1d/automation-scripts.git
       when: ansible_os_family == "Debian"
 
+    - name: run install script
+      ansible.builtin.shell:
+        path: /automation-scripts/scripts/sysadmins/debian-init-docker.sh
+      when: ansible_os_family == "Debian"
+      
+    - name: Install certbot
+      apt: 
+        name: python3-certbot-nginix
+        state: latest
+      when: ansible_os_family == "Debian"
+
+    - name: Run certbot
+      shell:
+      
+    

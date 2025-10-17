@@ -3,29 +3,40 @@
   become: yes
 
   tasks:
-    - name: install git
+    - name: Install git
       apt:
         name: git
         state: latest
+        update_cache: yes
       when: ansible_os_family == "Debian"
     
-    - name: clone repo with script
+    - name: Clone repo with script
       ansible.builtin.git:
-        clone: https://github.com/d3m0k1d/automation-scripts.git
+        repo: https://github.com/d3m0k1d/automation-scripts.git
+        dest: /opt/automation-scripts
+        version: main
       when: ansible_os_family == "Debian"
 
-    - name: run install script
-      ansible.builtin.shell:
-        path: /automation-scripts/scripts/sysadmins/debian-init-docker.sh
+    - name: Make install script executable
+      ansible.builtin.file:
+        path: /opt/automation-scripts/scripts/sysadmins/debian-init-docker.sh
+        mode: '0755'
       when: ansible_os_family == "Debian"
+
+    - name: Run install script
+      ansible.builtin.shell:
+        cmd: /opt/automation-scripts/scripts/sysadmins/debian-init-docker.sh
+        chdir: /opt/automation-scripts/scripts/sysadmins
+      when: ansible_os_family == "Debian"
+      register: docker_install_result
       
     - name: Install certbot
       apt: 
-        name: python3-certbot-nginix
+        name: python3-certbot-nginx
         state: latest
+        update_cache: yes
       when: ansible_os_family == "Debian"
 
-    - name: Run certbot
-      shell:
-      
-    
+    - name: Run certbot for domain
+      shell: certbot --nginx -d your-domain.com -d www.your-domain.com --non-interactive --agree-tos --email your-email@example.com
+      when: ansible_os_family == "Debian"

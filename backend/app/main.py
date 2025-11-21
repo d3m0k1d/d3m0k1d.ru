@@ -1,8 +1,12 @@
 import fastapi 
 import uvicorn
 
+#Import routes
+from app.api.v1.posts import router as post_router
+
 app = fastapi.FastAPI()
 
+#Include routes
+app.include_router(post_router)
 
-if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000) 
+ 

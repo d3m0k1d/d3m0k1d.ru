@@ -5,10 +5,10 @@ from typing import Optional
 class PostCreate(BaseModel):
     title: str = Field(min_length=3, max_length=150)
     content: str = Field(min_length=10)
-    images: Optional[str] = Field()
+    images: Optional[str] = Field(default=None)
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class PostRead(BaseModel):
@@ -18,13 +18,13 @@ class PostRead(BaseModel):
     images: str = Field()
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class PostUpdate(BaseModel):
     title: str = Field(min_length=3, max_length=150)
     content: str = Field(min_length=10)
-    images: Optional[str] = Field()
+    images: Optional[str] = Field(default=None)
 
     class Config:
-        orm_mode = True
+        from_attributes = True

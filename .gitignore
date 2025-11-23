@@ -3,3 +3,5 @@
 /backend/.python-version
 /backend/.env
 /backend/app/.env
+__pycache__/
+*.py[cod]

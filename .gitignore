@@ -1,3 +1,5 @@
 .vscode
 /backend/pyrightconfig.json
 /backend/.python-version
+/backend/.env
+/backend/app/.env

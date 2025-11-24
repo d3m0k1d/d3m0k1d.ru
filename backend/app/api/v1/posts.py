@@ -1,7 +1,8 @@
-from typing import Optional
+from typing import Optional, Sequence
 from fastapi import APIRouter, Depends, HTTPException, Query
+from sqlalchemy import select, delete
 from sqlalchemy.ext.asyncio import AsyncSession
-from app.schemas.posts import PostCreate, PostRead, PostRead
+from app.schemas.posts import PostCreate, PostRead
 from app.db_engine import get_async_session
 from app.models.posts import Post
 
@@ -15,9 +16,18 @@ router = APIRouter(
 
 @router.get("/")
 async def get_posts(
-    page: int = Query(1, ge=1), db: AsyncSession = Depends(get_async_session)
+    page: int = Query(1, ge=1),
+    page_size: int = Query(10, ge=1, le=100),
+    db: AsyncSession = Depends(get_async_session),
 ):
-    pass
+    offset = (page - 1) * page_size
+
+    stmt = select(Post).order_by(Post.id).offset(offset).limit(page_size)
+
+    result = await db.execute(stmt)
+    posts: Sequence[Post] = result.scalars().all()
+
+    return posts
 
 
 @router.get("/{id}", response_model=PostRead)
@@ -53,10 +63,13 @@ async def create_post(
 
 
 @router.put("/{id}")
-async def update_post(id: int):
+async def update_post(id: int, db: AsyncSession = Depends(get_async_session)):
     pass
 
 
 @router.delete("/{id}")
-async def delete_post(id: int):
-    pass
+async def delete_post(id: int, db: AsyncSession = Depends(get_async_session)):
+    stmt = delete(Post).where(Post.id == id)
+    await db.execute(stmt)
+    await db.commit()
+    return {"message": f"Post with id {id} deleted"}

@@ -63,13 +63,26 @@ async def create_post(
 
 
 @router.put("/{id}")
-async def update_post(id: int, db: AsyncSession = Depends(get_async_session)):
-    pass
+async def update_post(
+    id: int,
+    db: AsyncSession = Depends(get_async_session),
+    title: Optional[str] = None,
+    content: Optional[str] = None,
+    images: Optional[str] = None,
+):
+    s = select(Post).where(Post.id == id)
+    result = await db.execute(s)
+    post = result.scalars().first()
+
+    if post is None:
+        raise HTTPException(status_code=404, detail="Post not found")
+    await db.commit()
+    return post
 
 
 @router.delete("/{id}")
 async def delete_post(id: int, db: AsyncSession = Depends(get_async_session)):
-    stmt = delete(Post).where(Post.id == id)
-    await db.execute(stmt)
+    s = delete(Post).where(Post.id == id)
+    await db.execute(s)
     await db.commit()
-    return {"message": f"Post with id {id} deleted"}
+    return {"message": "Post deleted"}

@@ -5,7 +5,7 @@ from typing import Optional
 class PostCreate(BaseModel):
     title: str = Field(min_length=3, max_length=150)
     content: str = Field(min_length=10)
-    images: Optional[str] = Field(default=None)
+    images: Optional[str] = Field(min_length=0)
 
     class Config:
         from_attributes = True

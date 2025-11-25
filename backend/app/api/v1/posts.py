@@ -48,17 +48,12 @@ async def create_post(
 ) -> Post:
     try:
         post = PostCreate(title=title, content=content, images=images)
-    except Exception as e:
-        raise HTTPException(status_code=423, detail=str("Validation error"))
-
+    except ValueError as e:
+        raise HTTPException(status_code=422, detail=str(e))
     new_post = Post(title=post.title, content=post.content, images=post.images)
-    try:
-        db.add(new_post)
-        await db.commit()
-        await db.refresh(new_post)
-    except Exception as e:
-        raise HTTPException(status_code=400, detail=str(e))
-
+    db.add(new_post)
+    await db.commit()
+    await db.refresh(new_post)
     return new_post
 
 
@@ -76,6 +71,14 @@ async def update_post(
 
     if post is None:
         raise HTTPException(status_code=404, detail="Post not found")
+
+    if title is not None:
+        post.title = title  # type: ignore
+    if content is not None:
+        post.content = content  # type: ignore
+    if images is not None:
+        post.images = images  # type: ignore
+
     await db.commit()
     return post
 

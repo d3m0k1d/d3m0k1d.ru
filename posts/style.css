@@ -1,31 +1,241 @@
-body
-{
-    background-color: black;
-    font-family: commit mono, monospace;
-    color: white;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-a
-{
+body {
+    background-color: black;
+    font-family: 'Commit Mono', monospace;
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+a {
     text-decoration: none;
     color: white;
+    transition: color 0.3s ease;
 }
 
-.navigation
-{
-    font-size: 18px;
-    width: 50%;
-    margin: auto;
-    display: flex;
-    justify-content: center;
-    padding-top: 1%;
+a:hover {
+    color: hsl(270, 73%, 63%);
+}
 
+.navigation {
+    font-size: 16px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
 }
 
 .home-btn,
 .posts-btn,
 .guest-btn,
 .contacts-btn {
-    margin-left: 6.25%;
-    margin-right: 6.25%;
+    padding: 0.5rem 1rem;
+}
+
+.ascii-art {
+    text-align: center;
+    margin-top: 2rem;
+    width: 100%;
+    overflow-x: auto;
+    padding: 0 1rem;
+}
+
+.ascii-art pre {
+    font-size: clamp(0.5rem, 2.5vw, 1rem);
+    display: inline-block;
+    line-height: 1.2;
+    white-space: pre;
+    font-family: 'Courier New', Courier, monospace;
+    margin: 0 auto;
+}
+
+.nav-links {
+    text-align: center;
+    color: hsl(270, 73%, 53%);
+    padding: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.nav-links a {
+    color: hsl(270, 73%, 53%);
+    padding: 0.5rem;
+}
+
+.about-me-container {
+    width: 90%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+.about-me {
+    text-align: left;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+    display: block;
+}
+
+h1.about-me {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    margin-bottom: 1.5rem;
+}
+
+h2.about-me {
+    font-size: clamp(1.2rem, 3vw, 2rem);
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+h3.skill-category {
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: hsl(270, 73%, 63%);
+}
+
+.skills-section {
+    margin-top: 1rem;
+}
+
+
+.skills-section img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 1rem 0;
+}
+
+
+.footer {
+    width: 90%;
+    max-width: 100%;
+    padding: 2rem 1rem;
+    margin: auto auto 0;
+    text-align: center;
+    color: rgb(155, 156, 167);
+    margin-top: auto;
+}
+
+@media (min-width: 600px) {
+    .navigation {
+        font-size: 18px;
+        gap: 1.5rem;
+    }
+    
+    .ascii-art {
+        margin-top: 3rem;
+    }
+    
+    .ascii-art pre {
+        font-size: clamp(0.7rem, 2vw, 1.1rem);
+    }
+    
+    .about-me-container {
+        width: 85%;
+        padding: 3rem 2rem;
+    }
+    
+    .nav-links {
+        gap: 1.5rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .navigation {
+        width: 80%;
+        margin: 0 auto;
+        padding-top: 1.5rem;
+    }
+    
+    .home-btn,
+    .posts-btn,
+    .guest-btn,
+    .contacts-btn {
+        margin-left: 1.5rem;
+        margin-right: 1.5rem;
+    }
+    
+    .ascii-art {
+        margin-top: 4rem;
+    }
+    
+    .ascii-art pre {
+        font-size: clamp(0.8rem, 1.5vw, 1.2rem);
+    }
+    
+    .about-me-container {
+        width: 75%;
+        padding: 4rem 2rem;
+    }
+    
+    .footer {
+        width: 75%;
+        padding-top: 5rem;
+    }
+}
+
+
+@media (min-width: 1024px) {
+    .navigation {
+        width: 60%;
+        font-size: 18px;
+    }
+    
+    .home-btn,
+    .posts-btn,
+    .guest-btn,
+    .contacts-btn {
+        margin-left: 2rem;
+        margin-right: 2rem;
+    }
+    
+    .ascii-art {
+        margin-top: 5%;
+    }
+    
+    .about-me-container {
+        width: 60%;
+        max-width: 900px;
+        padding-top: 5%;
+    }
+    
+    .footer {
+        width: 60%;
+        max-width: 900px;
+        padding-top: 10%;
+    }
+    
+    .skills-section img {
+        max-width: 90%;
+    }
+}
+
+@media (min-width: 1440px) {
+    .navigation {
+        width: 50%;
+    }
+    
+    .about-me-container {
+        width: 50%;
+        max-width: 1000px;
+    }
+    
+    .footer {
+        width: 50%;
+        max-width: 1000px;
+    }
 }
